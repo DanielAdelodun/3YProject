@@ -1,0 +1,45 @@
+\section{Introduction} \label{intro}
+\subsection{The Definition} \label{def}
+
+The aim of this paper is to eventually define the Lebesgue Intergral - so lets just do exactly that:
+\begin{definition}[\em{\Lbg{} Integration\/}\rm]
+	Given
+	\begin{itemize}
+		\item a Measure Space; $(X, \A, \mu)$,
+		\item an $\A/\eB$ Measuarable Function $u : X \rightarrow \eR$,
+		\item positive functions $u^+$ and $u^-$ s.t. $u = u^+ - u^-$,
+		\item the sets $S^{\pm}$ of {\em all} Simple Functions ($S \subset \E_\mu^+$) on $(X, \A, \mu)$ s.t. $s \in S^{\pm} \Rightarrow s \leq u^{\pm}$,
+	\end{itemize}
+
+	we define the $\mu$-integral of u - which we write as $\int u\,d(\mu)$ - in terms of the integrals of the positive functions $u^+$ and 			$u^-$. The intergral of a general positive function - so including our $u^{\pm}$ - is defined as
+
+	\begin{equation*}\label{posint}\tag{\ref{L}$'$}
+	\int u^+\,d(\mu) \coloneqq \sup\bigr\{ I_\mu(s) : \ \  s \in \E^+ \hbox{ \ and \ } s \le u \bigl\},
+	\end{equation*}
+
+	and going back to our more general u, 
+
+	\begin{equation}\label{L}
+	\int u\,d(\mu) \coloneqq \int u^+\,d(\mu) - \int u^-\,d(\mu).
+	\end{equation}
+
+	If the domain of our function is $\R^n$, with the 'standard' $n$-dimensional Borel $\sigma$-algebra and Lebesgue Measure on it - i.e. $(X, \A, \mu) 	= (\R, \B, \lambda^n)$ - then this becomes the $\lambda^n$-integral (read as Lebesgue integral instead of lambda integral - or we just 			call it 'the integral') and we write
+
+	\begin{equation*} \tag{\ref{L}$''$}
+	\int u\,d(\lambda^n) =  \int u(x)\,d(\Ln) \coloneqq \int u(x)\,d(x) 
+	\end{equation*}
+\end{definition}
+
+That's quite a long definition, one which raises more questions than it answers. The first (and biggest) issue here is that, even assuming someone has taken a course in Analysis, there are many undefined terms;
+\begin{itemize}
+	\item What are Measures and $\sigma$-algebras? And what is a Measure Space?
+	\item What is the Borel $\sigma$-algerbra
+	\item What is a Measuarable Function? What is a Simple Function?
+	\item What is $I_\mu$ and why can it seemingly only be used on positive Simple Functions?
+\end{itemize}
+
+That last bullet point touches on the second key issue with this definition; why. Why any of this. What about this definition of what we call the integral makes it any better than the Reimann Integral? Do they even describe similar things? This is not at all immedately obvious, since the Reimann intergral is defined on functions $f: Y \rightarrow \R$ where Y is some compact\footnote{Define a compact set} subest of R and this integral is defined on...well, any set at all.
+
+Even if we can somehow convince ourselves they are compatible, it still seems like a convoluted defintion - what about Simple Functions is so special that the intergrals of all other functions are defined in terms of them (or to be more precise, why are general functions are defined in terms of positive functions, and then positive functions defined in terms of positive simple ones)?
+
+Interestingly (to me, at least) the Reinmann intergral is defined in a similarish way - we find the upper Reimann intergral of a function by finding all the Step Functions which bound the function from above, define/find the intergrals of these using their 'steppyness', then take the infinium - we do the same thing from below, and then if these limits coiencied then we call that the Reinmann integral. In order to understand the motivations behind Lebegsue Intgration better, let's take a slightly closer look at the similarites and differences between these two.
