@@ -38,13 +38,12 @@ for ax_rows in axes2:
 
 
 # Set up the graph.
-# TODO String together multiple Biezer curves (Probably Not).
 
-# Our graph is drawn by interpolation.
+# Our graph in this case is drawn by interpolation.
 xs = np.linspace(0, 10, num=11, endpoint=True)
 ys = [0, 0.5, 1.2, 1.4, 2, 3, 1.5, 1.75, 3, 3.5, 3]
 
-# Can change the definition of f to a general function which takes a float and returns another float.
+# Can change the definition of f to any function which takes a float and returns another float.
 f = interp1d(xs, ys, kind='cubic') # Here, though, we are just interpolating between the given points.
 xnew = np.linspace(0, 10, num=GRAN+1, endpoint=True)
 ynew = f(xnew)
