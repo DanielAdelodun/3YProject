@@ -34,6 +34,12 @@ for ax_rows in axes2:
     for ax in ax_rows:
         ax.set_xlim(0,10)
         ax.set_ylim(0, 4)
+        ax.tick_params(
+            axis='x',          # changes apply to the x-axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            labelbottom=False) # labels along the bottom edge are off
 (ax21, ax22), (ax23, ax24) = axes2
 
 
@@ -63,7 +69,7 @@ for STEP in range(0, MAX_STEP+1):
        
 
 c_step = 1
-# Plot a matrix of graphs, which each showing a different step of the approximation.
+# Plot a grid of graphs, which each showing a different step of the approximation.
 for ax_rows in axes:
     for ax in ax_rows:
         # Show the level sets and so the sizes of the level sets for each step
@@ -73,11 +79,24 @@ for ax_rows in axes:
         for y_base in np.arange(0, 4, DH):
             # For each step/axes, only color the graph up to height of the appoximating simple function.
             if y_base >= 0 and y_base < c_step:
-                ax.axhline(y_base, lw=0.3, alpha=0.5, color='k')
-                ax.axhspan(y_base, y_base+DH, facecolor=cm.jet((y_base/4)), alpha=0.5)
+                if y_base >= 1.5 and y_base <= 2:
+                    ax.axhline(y_base, lw=0.25, color='k', alpha=0.8)
+                else:
+                    pass
+#                    ax.axhline(y_base, lw=0.2, alpha=0.3, color='k', linestyle=':')
+                ax.axhspan(y_base, y_base+DH, facecolor=cm.jet((y_base/4)), alpha=0.5, edgecolor='none')
+#                ax.axhline(y_base, lw=0.3, alpha=0.5, color='k')
+#                ax.axhline(y_base+DH, lw=0.3, alpha=0.5, color='k')
             else:
-                ax.axhline(y_base, lw=0.3, alpha=0.5, color='k')
+                pass
         c_step += 1
+
+
+# Draw a line from x's which match y-base to x-axis
+# xfine = np.linspace(0, 10, 100) 
+for y_base in np.arange(1.5, 2, ss(2)):
+    xmatch = step[2][y_base]  
+    ax2.scatter(xmatch, [y_base]*len(xmatch), s=2, c=cm.jet((y_base/4)), alpha=1)
 
 # Create the bars for each graph of the approximating function.
 # For the graph representing step[2], for instance;
@@ -97,6 +116,8 @@ for ax_rows in axes2:
             xmax = m[-1]
             # Draw vbar.
             y_base = y_base + 0.01 if y_base == 0 else y_base
+            if y_base >= 1.5 and y_base < 2:
+                ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=cm.jet((y_base/4)), alpha=0.5, edgecolor='k')
             ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=cm.jet((y_base/4)), alpha=0.5)
         c_step += 1
 
