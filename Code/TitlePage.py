@@ -4,11 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.interpolate import interp1d
 import matplotlib.cm as cm
+from mpl_toolkits.axes_grid1.axes_divider import make_axes_locatable
+
 
 # Each entry in step is the result from one cycle of the approximation.
 # So step[2] contains the data for when the appoximating simple function has a height of 2.
 # The data being the a dictionary with key/value pairs where 
-# key = K * 2^(-STEP) for k up to STEP * 2^(STEP) (i.e. the lower bound of the set we are finding the inverse of).
+# key = k * 2^(-STEP) for k up to STEP * 2^(STEP) (i.e. the lower bound of the set we are finding the inverse of).
 # value = The set of xs such that f(x) is in [ key , key + 2^(-STEP) )
 MAX_STEP = 4
 step = []
@@ -18,15 +20,26 @@ POINT_SIZE = X_MAX/GRAN
 def ss(x):
     return 2**(-x)
 DH_DEFAULT = ss(2)
+def colour(x=1.0):
+    r = list(cm.winter(x/4))
+    r[3] = 0.5
+    return tuple(r)
 
 
 # Set up the axes.
-# Should be 2 sets of identical figures except the second has no x-tick labels.
 fig, axes = plt.subplots(nrows=2, ncols=2, dpi=72, figsize=(10, 10))
 for ax_rows in axes:
     for ax in ax_rows:
         ax.set_xlim(0,10)
         ax.set_ylim(0, 4)
+        ax.tick_params(
+           axis='both',       # changes apply to both axis
+           which='both',      # both major and minor ticks are affected
+           bottom=False,      # ticks along the bottom edge are off
+           top=False,         # ticks along the top edge are off
+           left=False,
+           labelleft=False, 
+           labelbottom=False) # labels along the bottom edge are off
 (ax1, ax2), (ax3, ax4) = axes
 
 fig2, axes2 = plt.subplots(nrows=2, ncols=2, dpi=72, figsize=(10, 10))
@@ -35,10 +48,12 @@ for ax_rows in axes2:
         ax.set_xlim(0,10)
         ax.set_ylim(0, 4)
         ax.tick_params(
-            axis='x',          # changes apply to the x-axis
+            axis='both',       # changes apply to both axis
             which='both',      # both major and minor ticks are affected
             bottom=False,      # ticks along the bottom edge are off
             top=False,         # ticks along the top edge are off
+            left=False,
+            labelleft=False,
             labelbottom=False) # labels along the bottom edge are off
 (ax21, ax22), (ax23, ax24) = axes2
 
@@ -46,8 +61,8 @@ for ax_rows in axes2:
 # Set up the graph.
 
 # Our graph in this case is drawn by interpolation.
-xs = np.linspace(0, 10, num=11, endpoint=True)
-ys = [0, 0.5, 1.2, 1.4, 2, 3, 1.5, 1.75, 3, 3.5, 3]
+xs = np.linspace(0, 10, num=5, endpoint=True)
+ys = [0, 1.75, 0.9, 2.5, 2.5]
 
 # Can change the definition of f to any function which takes a float and returns another float.
 f = interp1d(xs, ys, kind='cubic') # Here, though, we are just interpolating between the given points.
@@ -72,34 +87,36 @@ c_step = 1
 # Plot a grid of graphs, which each showing a different step of the approximation.
 for ax_rows in axes:
     for ax in ax_rows:
-        # Show the level sets and so the sizes of the level sets for each step
         DH = ss(c_step)
-        # To make it look nice, change the line width.
-        ax.plot(xnew, ynew, color='k', lw=0.7)
+        # Plot the graph on each axis
+        ax.plot(xnew, ynew, color='0.1', lw=0.5, linestyle='-')
         for y_base in np.arange(0, 4, DH):
             # For each step/axes, only color the graph up to height of the appoximating simple function.
             if y_base >= 0 and y_base < c_step:
-                if y_base >= 1.5 and y_base <= 2:
-                    ax.axhline(y_base, lw=0.25, color='k', alpha=0.8)
-                else:
-                    pass
-#                    ax.axhline(y_base, lw=0.2, alpha=0.3, color='k', linestyle=':')
-                ax.axhspan(y_base, y_base+DH, facecolor=cm.jet((y_base/4)), alpha=0.5, edgecolor='none')
-#                ax.axhline(y_base, lw=0.3, alpha=0.5, color='k')
-#                ax.axhline(y_base+DH, lw=0.3, alpha=0.5, color='k')
-            else:
-                pass
+                if y_base >= 1 and y_base < 1.5:
+                    ax.axhline(y_base, lw=0.5, color='k', alpha=0.7, linestyle='-.')
+                    ax.axhspan(y_base, y_base+DH, facecolor=colour(y_base), edgecolor='none')
+                ax.axhspan(y_base, y_base+DH, facecolor=colour(y_base), edgecolor='none')
+        ax_divider = make_axes_locatable(ax)
+        cax = ax_divider.append_axes("bottom", size="5%", pad="2%")
+        cax.set_xlim(0,10)
+        cax.set_ylim(3.7,3.8)
+        cax.tick_params(
+            axis='both',       # changes apply to both axis
+            which='both',      # both major and minor ticks are affected
+            bottom=False,      # ticks along the bottom edge are off
+            top=False,         # ticks along the top edge are off
+            left=False,
+            labelleft=False,
+            labelbottom=False) # labels along the bottom edge are off
+        cax.axis('off')
+        for y_base in np.arange(0, c_step, ss(c_step)):
+                xmatch = step[c_step][y_base]  
+                cax.scatter(xmatch, [3.75]*len(xmatch), s=15, c=[colour(y_base)], marker='s')
+                print(xmatch)
         c_step += 1
 
-
-# Draw a line from x's which match y-base to x-axis
-# xfine = np.linspace(0, 10, 100) 
-for y_base in np.arange(1.5, 2, ss(2)):
-    xmatch = step[2][y_base]  
-    ax2.scatter(xmatch, [y_base]*len(xmatch), s=2, c=cm.jet((y_base/4)), alpha=1)
-
-# Create the bars for each graph of the approximating function.
-# For the graph representing step[2], for instance;
+#  For the graph representing step[2], for instance;
 #  - The heights of the bars should be k * ss(2) up to 2 - ss(2)
 #  - The width of the bar at height k * ss(2) = y_base should be "the number of x's mapped between 
 #       y_base and y_base + ss(2) * 'the measure' of a single x"; so it'll be len(step[2][y_base]) * POINT_SIZE.
@@ -116,9 +133,9 @@ for ax_rows in axes2:
             xmax = m[-1]
             # Draw vbar.
             y_base = y_base + 0.01 if y_base == 0 else y_base
-            if y_base >= 1.5 and y_base < 2:
-                ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=cm.jet((y_base/4)), alpha=0.5, edgecolor='k')
-            ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=cm.jet((y_base/4)), alpha=0.5)
+            if y_base >= 1 and y_base < 1.5:
+                ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=colour(y_base), edgecolor='k')
+            ax.axvspan(xmin, xmax, ymax=y_base/4, facecolor=colour(y_base)) 
         c_step += 1
 
 
