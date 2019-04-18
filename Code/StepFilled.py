@@ -3,7 +3,7 @@ import matplotlib.patches as patches
 import matplotlib.cm as cm
 import numpy as np
 import numpy.random as rand
-## Added Filling
+# Added Filling
 rand.seed(19)
 
 fig, ax = plt.subplots(nrows=1, 
@@ -24,18 +24,18 @@ for x in range(len(points) - 1):
               linewidth=1.2, 
               linestyle='-', 
               color='k')
-## Draw rectangle patches at those but coloured over integer steps
-#for y in range(10):
-#    for x in range(len(points)):
-#        if y >= points[x]:
-#            continue
-#        rect = patches.Rectangle((y, 0),
-#                                 1,
-#                                 heights[x-1],
-#                                 color=cm.spring(y/10),
-#                                 alpha=0.3)
-#        ax.add_patch(rect)
-#        break
+# Draw rectangle patches at those but coloured over integer steps
+for y in range(10):
+    for x in range(len(points)):
+        if y >= points[x]:
+            continue
+        rect = patches.Rectangle((y, 0),
+                                 1,
+                                 heights[x-1],
+                                 color=cm.spring(y/10),
+                                 alpha=0.3)
+        ax.add_patch(rect)
+        break
 
 # Dotted horizontal lines at the jumps
 for i, x in enumerate(points[1:-1]):
@@ -49,4 +49,4 @@ ax.plot(points[1:-1], heights[1:-1], 'bo', fillstyle='none')
 ax.plot(points[1:-1], heights[:-2], 'bo', fillstyle='none') 
 
 #plt.show()
-plt.savefig('Step.png')
+plt.savefig('StepFilled.png')
