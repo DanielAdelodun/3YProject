@@ -3,7 +3,7 @@ import matplotlib.patches as patches
 import matplotlib.cm as cm
 import numpy as np
 import numpy.random as rand
-## Added Filling
+# Added Filling
 rand.seed(19)
 
 fig, ax = plt.subplots(nrows=1, 
@@ -24,7 +24,15 @@ for x in range(len(points) - 1):
               linewidth=1.2, 
               linestyle='-', 
               color='k')
-## Draw rectangle patches at those but coloured over integer steps
+    # Draw rectangle patches under those lines
+    rect = patches.Rectangle((points[x], 0),
+                             (points[x+1] - points[x]),
+                             heights[x],
+                             color=cm.rainbow(x/15 + 0.1),
+                             alpha=0.8)
+    ax.add_patch(rect)
+
+## Draw rectangle patches under the lines but coloured over integer steps
 #for y in range(10):
 #    for x in range(len(points)):
 #        if y >= points[x]:
@@ -49,4 +57,4 @@ ax.plot(points[1:-1], heights[1:-1], 'bo', fillstyle='none')
 ax.plot(points[1:-1], heights[:-2], 'bo', fillstyle='none') 
 
 #plt.show()
-plt.savefig('Step.png')
+plt.savefig('StepFilled3.png')
