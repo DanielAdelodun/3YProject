@@ -7,7 +7,7 @@ fig, ax = plt.subplots(nrows=1,
                        ncols=1,
                        subplot_kw={'xlim': (0, xmax),
                                    'ylim': (-0.25, 1.5)}, 
-                       figsize=(5, 2), 
+                       figsize=(5, 2.5), 
                        dpi=300)
 
 # Add a solid line at 0.
