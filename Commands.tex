@@ -1,24 +1,47 @@
+% !TeX root = Project.tex
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\B}{\mathcal{B}}
-\newcommand{\eB}{\bar \B}
+\newcommand{\E}{\mathcal{E}}
 \newcommand{\Lb}{\mathcal{L}}
-\newcommand{\R}{\mathbb{R}}
+\newcommand{\eB}{\bar \B}
 \newcommand{\eR}{\bar \R}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
-\newcommand{\E}{\mathcal{E}}
 \newcommand{\Ln}{\lambda^n}
+\newcommandx{\intx}[2][2=x]{\int {#1} \, d{#2}}
 \newcommand{\LI}[1]{\int {#1} \, d(\Ln)}
 \newcommand{\MI}[1]{\int {#1} \, d(\mu)}
 \newcommand{\Lbg}{Lebesgue{}}
 \newcommand{\Rim}{Riemann{}}
-% \setlength{\parskip}{1em}
+\newcommand{\logeq}{\mathrel{\vcentcolon\Leftrightarrow}}
+\newcommand{\defcol}{mygrey}
+\definecolor{mygrey}{gray}{0.5}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
+\newtheoremstyle{defrule}%
+	{8pt}%
+	{5pt}{}{}{}%
+	{.}%
+	{.5em}%
+	{\thmname{\bf #1}\thmnumber{ #2}\thmnote{\color{mygrey}\ (#3)}}
+
+\theoremstyle{defrule}
+\newtheorem{define}{Definition}
+   \newenvironment{definition}[1][]%
+	{\begin{define}[#1]}%
+	{\color{\defcol}\hfil\noindent\raise 5pt \hbox{\rule{8cm}{.4pt}}\hfil\end{define} } 
 
 \numberwithin{equation}{section}
-\numberwithin{definition}{section}
+\numberwithin{define}{section}
 \numberwithin{figure}{section}
+
+\hypersetup{
+    %draft,
+    colorlinks=true, linktoc=all, pdfstartpage=5, pdfstartview=FitV,
+    %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV,
+    breaklinks=true, pageanchor=true, pdfpagemode=UseOutlines,
+    hypertexnames=true, pdfhighlight=/I,
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, pagecolor=RoyalBlue,
+}
