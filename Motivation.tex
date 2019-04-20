@@ -3,21 +3,20 @@
 \subsection{The Motivation}
 Our goal when we integrate a function is to find the amount of `space' between the graph and x-axis (or the Abscissa if you're fancy). It's pretty difficult to say how much space an arbitrary curve takes up, but we can work out the area of rectangles very easily --- by calculating the {\em base $\times$ height}. Riemann integration takes advantage of this, and defines the integral of a function $f:\R \rightarrow \R$ by first bounding it from above with rectangular functions and finding the smallest of these areas (which is would be an upper bound for the area of the function), then we bound the function from below and find an lower bound, then we hope that these two bounds match up. 
 
-\begin{figure}[H]
-\centering
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics{Code/Area1.png}
-  \captionof{figure}{Bounding from Below}
-  \label{fig:areabelow}
-\end{minipage}%
-\begin{minipage}{.5\textwidth}
-  \centering
-  \includegraphics{Code/Area2.png}
-  \captionof{figure}{Bounding from Above}
-  \label{fig:areaabove}
-\end{minipage}
+
+\begin{figure}[H] % Remember to change this to 'h'!
+	\renewcommand{\subfigcapskip}{-5pt}
+	\centering
+	\subfigure[Bounding from Below.]{%
+		\label{fig:areabelow}
+		\includegraphics{Code/Area3.png}}
+	\subfigure[Bounding from Above.]{%
+		\label{fig:areaabove}
+		\includegraphics{Code/Area4.png}}
+	\caption{Approximating Area with Step Functions.}
+	\label{fig:areaapprox}
 \end{figure}
+
 
 If the domain of our function (the `x-axis'), is $\R^2$ instead of just $\R$, we'd actually calculating a volume by finding the `space' between the graph and the axis. Curves are bad enough, but it's even harder to find the volume under a surface. Basic Riemann integration doesn't apply to these functions --- but we can still make a similar simplification and think of the `area of a rectangle' (which in $\R^2 \rightarrow \R$ would actually be the volume of a cuboid) as being calculated in much the same way as in $\R$; the size of the base (which is now an area, instead of a length) $\times$ the height. It'd be nice if there were a way to take advantage of this so that we could integrate any function where we can make sense of `the size of the base.' With this is mind, lets clear up some of the terms we are going to use:
 
@@ -32,13 +31,6 @@ If the domain of our function (the `x-axis'), is $\R^2$ instead of just $\R$, we
 Already, we can see an improvement over Riemann Integration; \emph{Lebesgue Integration} is defined on any set at all, and even the more restricted \emph{Lebesgue Integral} can be calculated directly for any $\R^n$ --- so no double/triple integration nonsense. To see another benefit of the Lebesgue integral over Riemann, let's look at the canonical example of a function for which the Riemann integral fails; $f\colon \R \rightarrow \R,\ \ f(x) = \mathbbm{1}_\Q(x)$ (Figure \ref{fig:rational}). This is also an example of a \emph{Simple Function} since it is just the \emph{Indicator Function} of a measurable set, but lets not get ahead of ourselves$\ldots$ First, we should define the Riemann integral. 
 
 \subsection{The Definition of the Riemann Integral}
-\begin{figure}[ht]
-	\centering
-	\includegraphics{Code/Rational.png}
-	\caption{An illustration of the indicator function $\mathbbm{1}_\Q(x)$, showing a few rationals that are multiples of negative powers of 2.}
-	\label{fig:rational}
-\end{figure}
-
 The definition of the Riemann integral involves a few steps, and so it's going to take a little patience. The first step is defining a step function (no pun intended).
 %
 \begin{figure}[h]
@@ -86,7 +78,8 @@ What's not okay is that any one step function may have different sequences which
 \end{figure}
 
 \vbox{%
-\begin{definition}[Riemann Integral of a Step Function]
+\begin{definition}[Integral of a Step Function]
+\label{def:stepint}
 	Given
 	\begin{itemize}
 	\item 
@@ -96,7 +89,7 @@ What's not okay is that any one step function may have different sequences which
 	\item
 		the corresponding \emph{height sequence} $(c_n)_{n=1}^N : \phi(x) = c_n \quad \forall x \in (x_{n-1}, x_{n})$,
 	\end{itemize}
-	then the Riemann Integral of $\phi$ (as a function of x) on $[a, b]$ is
+	then the \emph{Integral} of $\phi$ as a function of $x$ on $[a, b]$ is
 	\begin{equation}
 	\begin{split}
 		&\intx{\phi(x)} \\
@@ -111,15 +104,15 @@ The idea behind why this is true is the following;
 \begin{itemize}
 \renewcommand\labelitemi{$\times$}
 \item
-First, we will focus on the representation that is more `fine' --- i.e. the one that has smaller width rectangles; ones which are divisions of the rectangles in the `coarser' representation. 
+Assuming first that one seqence is a subseqence of the other, we will focus on the representation that is more `fine' --- i.e. the one that has smaller width rectangles; ones which are divisions of the rectangles in the `coarser' representation. 
 \item
 We look at it in sections; with the sections being the steps of the coarser representation. So, in \ref{fig:step}, we'd look at $\{0, 1, 2 \ldots, 10\}$ between 0 and 2, then 2 and 3, then 3 and 6 $\ldots$ etc. 
 \item
-The two representations are for a single the step function, and we use this group adjacent rectangles with the same height. $\phi(x)$ must be constant in the section we are looking at, we know that all the rectangles here have the same height
+The two representations are for a single the step function, and we use this group adjacent rectangles with the same height. $\phi(x)$ must be constant in the section we are looking at, and so we know that all the rectangles here have the same height
 \item
 Then we can use the distributive property of multiplication to view the smaller width rectangles of the same height as one big rectangle with the width of the whole section. And boom, we're done, since those big rectangles are exactly the ones which you would use when integrating using the coarser representation.
-\item
-If neither representation is contained within the other, then we ca just create a third representation which is the union the first ones. Both original sequences will be coarser than this new one, and so we can use the same reasoning as before, plus transitivity and symmetry, to prove the integrals are the same.
+\item[$\otimes$]
+If neither representation is contained within the other, then we can just create a third representation which is the union the first ones. Both original sequences will be coarser than this new one, and so we can use the same reasoning as before, plus transitivity and symmetry, to prove the integrals are the same.
 \end{itemize}
 
 \begin{figure}[t] % Remember to change this to 'h'!
@@ -143,7 +136,7 @@ If neither representation is contained within the other, then we ca just create 
 		\item
 		$\phi \in \allstep$,
 		\item
-		$N, M \in \N$ and the representations $(x_n)_{n=0}^N$ and $(x'_m)_{m=0}^m$ of $\phi$,
+		$N, M [=N'] \in \N$ and the representations $(x_n)_{n=0}^N$ and $(x'_{m [=n']})_{m=0}^M$ of $\phi$,
 		\item
 		The respective height sequences $(c_n)_{n=1}^N$ and $(c'_m)_{m=1}^M$ of these representations,
 	\end{itemize}
@@ -172,7 +165,47 @@ If neither representation is contained within the other, then we ca just create 
 	Let $X'' = \{x''_{n''}; x"_{n''} \in X\cup X'\}$.
 	\begin{IEEEeqnarray}{rCc}
 		&  & \{x_n; n \in \N_{n<N}\} \subset \{x''_{n''}; n'' \in \N_{<N''}\} \supset \{x'_{n'}; n' \in \N_{m<M}\} \vspace{3pt}\nonumber \\
-		& \Rightarrow \quad & \sum_{X'} = \sum_{X''} = \sum_{X'} \nonumber 
+		& \Rightarrow \quad & \sum_{X} = \sum_{X''} = \sum_{X'} \nonumber 
 	\end{IEEEeqnarray}
 \end{cproof}
+Now we are ready to define the \emph{Riemann Intergral} of any function $f\colon [a, b] \rightarrow \R$ $\ldots$ almost. We first need to define 2 seperate upper and lower intergrals, and then if they are the same, what we call that the {Reimann Intergral} of the function. This is actually why $\mathbbm{1}_\Q(x)$ is not \emph{Reimann Integrable}; it's upper and lower intergrals do not coincide. 
+
+\medskip
+To find the \emph{Upper Reimann Intergral} of $f$, first find \emph{all} the step functions which bound it from above, then calculate their integrals using \dref{def:stepint} and then, finally, define the smallest of these intergrals to be the \emph{Upper Reimann Intergral.} To find the \emph{Lower Reimann Integral,} you do the same thing, but from below. The set of Reimann Integrable functios on $[a,b]$ is $\mathcal{R}([a, b])$.
+
+\medskip
+Figure \ref{fig:areaapprox} tries to illustrate this, but it's important to remember that we aren't looking at a seqence of step functions, we are looking at \emph{all of them}. How to calculate/approximate intergrals using step functions is a whole thing in itself --- I wish I had started writing this sooner so that I could get into it because it's super interesting, but alas. Anyway, now we can define \emph{Reimann Integration} for real:
+
+\begin{definition}[Riemann Intergration]
+	Given  
+	\begin{itemize}
+	\item
+		$f\colon [a, b] \rightarrow \R$,
+	\item
+		$S_l \subset \allstep : \psi \in S_l \Leftrightarrow \ \psi(x) \leq f(x) \quad \forall x \in [a, b] $,
+	\item
+		$S_u \subset \allstep : \phi \in S_u \Leftrightarrow \ \phi(x) \geq f(x') \quad \forall x' \in [a, b] $,
+	\end{itemize}
+	then the \emph{Lower Riemann Integral} of $f$ is
+	\begin{equation}
+		\underline {\int} \, f(x) \, dx \defeq \sup \left\{\intx{\psi(x)}; \;\; \psi \in S_l\right\}
+		\label{eq:lowerriemann}
+	\end{equation} 
+	and the \emph{Upper Reimann Integral} is
+	\begin{equation}
+		\overline {\int} \, f(x) \, dx \defeq \inf \left\{\intx{\phi(x)}; \;\; \phi \in S_u\right\}.
+		\label{eq:upperriemann}
+	\end{equation}
+	If \eqref{eq:lowerriemann} = \eqref{eq:upperriemann}, then $f$ is \emph{Reimann Integrable} the \emph{Reimann Integral} of $f$ as a function of $x$ is 
+	\begin{equation}
+		\intx{f(x)} \defeq \underline {\int} \, f(x) \, dx = \overline {\int} \, f(x) \, dx
+	\end{equation}
+\end{definition}
+
 \subsection{The Indicator function $\mathbbm{1}_\Q(x)$}
+\begin{figure}[ht]
+	\centering
+	\includegraphics{Code/Rational.png}
+	\caption{An illustration of the indicator function $\mathbbm{1}_\Q(x)$, showing a few rationals that are multiples of negative powers of 2.}
+	\label{fig:rational}
+\end{figure}
