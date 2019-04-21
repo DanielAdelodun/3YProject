@@ -1,6 +1,9 @@
 % !TeX root = Project.tex
 \newcommand{\A}{\mathcal{A}}
 \newcommand{\B}{\mathcal{B}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\J}{\mathcal{J}^{o,n}}
+\renewcommand{\P}{\mathcal{P}}
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\Lb}{\mathcal{L}}
 \newcommand{\eB}{\bar \B}
@@ -15,7 +18,9 @@
 \newcommand{\LI}[1]{\int {#1} \, d(\Ln)}
 \newcommand{\MI}[1]{\int {#1} \, d(\mu)}
 \newcommand{\allstep}{\mathcal{S}([a, b])}
-\newcommand{\function}{$f\colon [a, b] \rightarrow \R$}
+\newcommand{\function}{f\colon [a, b] \rightarrow \R}
+\newcommand{\measurespace}{\bigl(\R^n, \B(\R^n)\bigr)}
+\newcommandx{\indi}[2][1={\Q}, 2=x]{\mathbbm{1}_{#1}(#2)}
 \newcommand{\logeq}{\mathrel{\vcentcolon\Leftrightarrow}}
 \newcommand{\defcol}{mygrey}
 \newcommand{\thmcol}{cyan}
@@ -40,7 +45,7 @@
 \newtheorem{define}{Definition}
    \newenvironment{definition}[1][]%
 	{\begin{define}[#1]}%
-	{\color{\defcol}\hfil\noindent\raise 5pt \hbox{\rule{8cm}{.4pt}}\hfil\end{define} } 
+	{\par\noindent\color{\defcol}\hfil{\large* * *}\hfil\end{define} } 
 
 \theoremstyle{thm}
 \newtheorem{theorem}{Theorem}
@@ -60,7 +65,7 @@
     %colorlinks=false, linktocpage=false, pdfstartpage=3, pdfstartview=FitV,
     breaklinks=true, pageanchor=true, pdfpagemode=UseOutlines,
     hypertexnames=true, pdfhighlight=/I,
-    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, pagecolor=RoyalBlue,
+    urlcolor=WildStrawberry, linkcolor=RoyalBlue, citecolor=webgreen, pagecolor=RoyalBlue,
 }
 
 \makeatletter

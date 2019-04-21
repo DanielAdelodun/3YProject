@@ -1,0 +1,20 @@
+\begin{definition}[***]
+Given ***
+\begin{itemize}
+\item
+***
+\item
+***
+\end{itemize}
+***
+\begin{enumerate}[(i)]
+\centering
+\item
+	$***$
+\item
+	$***$
+\item
+	$***$
+\end{enumerate}
+$$***$$
+\end{definition}

@@ -1,4 +1,4 @@
-\documentclass[pdflatex]{article}
+\documentclass{article}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage[UKenglish]{isodate}
@@ -8,12 +8,14 @@
 \usepackage{float}
 \usepackage[font={small, sl}, labelfont=bf, justification=centering]{caption}
 \usepackage[tight]{subfigure}
-\usepackage{enumitem}
+\usepackage[toc, page]{appendix}
 \usepackage{IEEEtrantools}
 \usepackage{xargs}
+\usepackage[shortlabels]{enumitem}
 \usepackage{nameref}
 \usepackage{hyperref}
 \usepackage{amsrefs}
+
 
 \input{Commands}
 
@@ -23,6 +25,7 @@
 
 \begin{document}
 	\input{Cover}
-	\input{Definition}
+	\input{Introduction}
 	\input{Motivation}
+	\input{Appendix}
 \end{document}
