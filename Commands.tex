@@ -19,14 +19,15 @@
 \newcommand{\MI}[1]{\int {#1} \, d(\mu)}
 \newcommand{\allstep}{\mathcal{S}([a, b])}
 \newcommand{\function}{f\colon [a, b] \rightarrow \R}
-\newcommand{\measurespace}{\bigl(\R^n, \B(\R^n)\bigr)}
+\newcommand{\measurespace}{\bigl(\R, \B(\R)\bigr)}
 \newcommandx{\indi}[2][1={\Q}, 2=x]{\mathbbm{1}_{#1}(#2)}
 \newcommand{\logeq}{\mathrel{\vcentcolon\Leftrightarrow}}
 \newcommand{\defcol}{mygrey}
 \newcommand{\thmcol}{cyan}
 \definecolor{mygrey}{gray}{0.5}
-\newcommand{\dref}[1]{\hypersetup{linkcolor=\defcol}{\color{\defcol}\hyperlink{#1}{Definition}} \ref{#1}\hypersetup{linkcolor=RoyalBlue}}
-
+\newcommandx{\tref}[2][2=Theorem]{\hypersetup{linkcolor=\thmcol}{\hyperref[#1]{#2}}\hypersetup{linkcolor=RoyalBlue}}
+\newcommandx{\dref}[2][2=Definition]{\hypersetup{linkcolor=\defcol}{\hyperref[#1]{#2}}\hypersetup{linkcolor=RoyalBlue}}
+\newcommandx{\drefn}[2][2=Definition]{\hypersetup{linkcolor=\defcol}{\hyperref[#1]{#2} \ref{#1}}\hypersetup{linkcolor=RoyalBlue}}
 \newtheoremstyle{defrule}%
 	{8pt}%
 	{5pt}{}{}{}%
@@ -50,7 +51,7 @@
 \theoremstyle{thm}
 \newtheorem{theorem}{Theorem}
 \newtheorem{prop}[theorem]{Proposition}
-    \newenvironment{cproof}[1][Proof]%
+\newenvironment{cproof}[1][Proof]%
 	{\begin{proof}[\color{\thmcol}#1]}%
 	{\end{proof} }
 
@@ -73,5 +74,9 @@
                      \raisebox{0.3ex}{$\m@th\cdot$}}%
                      \raisebox{-0.3ex}{$\m@th\cdot$}}%
                      =}
+\newcommand*{\eqdef}{\mathrel{
+		    {=}\rlap{%
+                     \raisebox{0.3ex}{$\m@th\cdot$}}%
+                     \raisebox{-0.3ex}{$\m@th\cdot$}}}
 \makeatother
 

@@ -1,6 +1,6 @@
 % !TeX root = Project.tex
 \subsection{The Definition of the Riemann Integral}
-The definition of the Riemann integral involves a few steps, and so it's going to take a little patience. The first step is defining a step function (no pun intended).
+The definition of the Riemann Integral involves a few steps, and so it's going to take a little patience. The first step is defining a \dref{def:stfun}[\emph{Step Function}] - no pun intended.
 %
 \begin{figure}[h]
 	\centering
@@ -9,35 +9,36 @@ The definition of the Riemann integral involves a few steps, and so it's going t
 	\label{fig:step}
 \end{figure}
 
-A function is called a step function if and only if there exists some finite sequence of points such that the function is constant between any two adjacent points. So, for the function with the graph shown below in Figure \ref{fig:step}, the points $\{0, 2, 3, 6, 8, 10\}$ are the finite sequence which make this a step function. We will often index the elements of sequence using $n$, and label each element $x_n$. We can call sequence this a \emph{`representation'} of the function, and we can call the sequence of constant heights just \emph{before} each point the corresponding \emph{`height sequence'}. The \emph{height sequence} along with the representation fully describe the function.
+A function is called a \dref{def:stfun}[\emph{Step Function}] if and only if there exists some finite sequence of points such that the function is constant between any two adjacent points. So, for the function with the graph shown in Figure \ref{fig:step}, the points $\{0, 2, 3, 6, 8, 10\}$ are a finite sequence which make this a step function. We will often index the elements of sequence using $n$, and label each element $x_n$. We can call sequence this a \emph{`representation'} of the function, and we can call the sequence of constant heights taken just \emph{before} the $n^{th}$ point in our representation the corresponding \emph{`height sequence'}. The \emph{height sequence} along with the representation fully describe the function.
 
 \medskip
 Note two important points;
 \begin{itemize}
 	\item We could have picked $\{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$ to be our representation, since the function also happens to constant between any two adjacent integers. 
-	\item It doesn't really matter what the function is {\em at} the points $x_n$ --- we only care whether the function is constant {\em between} the points. In our graph, 2, 3, 6, and 8 are discontinues, but that doesn't matter since they're also in our sequence of points. 
+	\item It doesn't really matter what the function is {\em at} the points $x_n$ --- we only care whether the function is constant {\em between} our given points. In our graph, 2, 3, 6, and 8 are discontinues, but that doesn't matter since they're also in our sequence of points. 
 \end{itemize}
 
 The formal definition is as follows;
-\begin{definition}[Step Function]
-    $\phi\colon \ [a, b] \rightarrow \R$ is a {\em step function}
+\begin{definition}[Step Function]\label{def:stfun}
+Given $\phi\colon \ [a, b] \rightarrow \R$, $\phi$ is a {\color{Magenta}\emph{Step Function}}
     \begin{itemize}
         \item[$\logeq$]
-            $\phi \in \mathcal{S}([a, b])$
+            $\phi \in {\color{Magenta}\mathcal{S}([a, b])}$
         \item[$\logeq$]
-            $\exists N \! \in \! \N$ \ and \ $\exists X = (x_n)_{n=0}^N$ : $a = x_0 < x_1 < \ldots < x_{n-1} < x_n = b$, \ and \ $\forall m\in\N_{< N}$ we have $\exists! c_m \in \R$ : $\forall z \in (x_{m-1}, x_{m})$ we have $\phi(z) = c_m$.
+            $\exists N \! \in \! \N$ \ : \ $\exists X = (x_n)_{n=0}^N$ : $a = x_0 < x_1 < \ldots < x_{n-1} < x_n = b$, \ and \ $\forall m\in\N_{< N}$ we have $\exists! c_m \in \R$ : $\forall z \in (x_{m-1}, x_{m})$ we have $\phi(z) = c_m$.
     \end{itemize}
 \end{definition}
 
-This also defines \emph{the set of all step functions on} $[a, b]$ as $\mathcal{S}[a, b]$. This kind of thing is done a lot in analysis --- we often want to look at the set of all things which satisfy some property. We normally don't have to \emph{find} them all --- we just need a way to represent the full set. The fact that it'd be near impossible to try to imagine the set $\mathcal{S}([a, b])$ is irrelevant --- it's just important we know it exists.
+This also defines \emph{the set of all step functions on} $[a, b]$ as \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}]. This kind of thing is done a lot in analysis --- we often want to look at the set of all things which satisfy some property. We normally don't have to \emph{find} them all --- we just need a way to represent the full set. The fact that it'd be near impossible to try to imagine the set \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}] is irrelevant --- it's just important we know it exists.
 
 \medskip
-Next, we want to define what it means to integrate a step function. Remember, the point of working with step functions is because it's easy to find the area of rectangles, and integration is all about finding areas. So where are the rectangles? 
+Next, we want to define what it means to \dref{def:stint}[\emph{Integrate}] a step function. Remember, the point of working with step functions is because it's easy to find the area of rectangles, and integration is all about finding areas. So where are the rectangles? 
 
 \medskip
-As is hinted at by Figure \ref{fig:step}, we can make the bases of the rectangles the width the intervals $(x_{n-1}, x_n)$, and the heights the constant $c$ which values in this interval take. This is made even clearer by Figure \ref{fig:stepfilled}, where we can also see that the sometimes our heights will have negative values, and that's okay --- these areas are just taken away from the total area instead of added to it.
+As is hinted at by Figure \ref{fig:step}, we can make the bases of the rectangles the widths of the intervals $(x_{n-1}, x_n)$, and the heights the constant $c_n$s which values in these interval take. This is made even clearer by Figure \ref{fig:stepfilled}, where we can also see that the sometimes our heights will have negative values, and that's okay --- these areas are just taken away from the total area instead of added.
  
-What's not okay is that any one step function may have different sequences which we can use to prove that it's a step function --- or in other words, the same step function may have different but equally valid representations. We defined the integral of a step function in terms it's representation, but how do we know that different representations of the same function produce the same integral? Figure \ref{fig:stepfilled} demonstrates that, given the representations $\{0, 2, 3, 6, 8, 10\}$ and $\{0, 1, 2, \ldots, 10\}$ of \ref{fig:step}, we're fine, and the areas are equal. It turns out that this is the case in general --- the integral of a step function is independent of the chosen representation.
+ \medskip
+What's not okay is that any one step function may have different sequences which we can use to prove that it's a step function --- or in other words, the same step function may have different but equally valid representations. We want to define the integral of a step function in terms it's representation, but how do we know that different representations of the same function produce the same integral? Figure \ref{fig:stepfilled} demonstrates that, given the representations $\{0, 2, 3, 6, 8, 10\}$ and $\{0, 1, 2, \ldots, 10\}$ of \ref{fig:step}, we're fine, and the areas are equal. \tref{thm:repuni}[It turns out] that this is the case in general --- the integral of a step function is independent of the chosen representation.
 
 \begin{figure}[h]
   \centering
@@ -46,8 +47,7 @@ What's not okay is that any one step function may have different sequences which
   \label{fig:stepfilled}
 \end{figure}
 
-\begin{definition}[Integral of a Step Function]
-\label{def:stepint}
+\begin{definition}[Integral of a Step Function]\label{def:stint}
 	Given
 	\begin{itemize}
 	\item 
@@ -57,32 +57,32 @@ What's not okay is that any one step function may have different sequences which
 	\item
 		the corresponding \emph{height sequence} $(c_n)_{n=1}^N : \phi(x) = c_n \quad \forall x \in (x_{n-1}, x_{n})$,
 	\end{itemize}
-	then the \emph{Integral} of $\phi$ as a function of $x$ on $[a, b]$ is
+	then the {\color{Magenta}\emph{Integral}} of $\phi$ as a function of $x$ on $[a, b]$ is
 	\begin{equation}
 	\begin{split}
-		&\intx{\phi(x)} \\
+		&{\color{Magenta}\intx{\phi(x)}} \\
 		\defeq \quad &\sum_{i=1}^N c_i(x_{i} - x_{i-1}).
 	\end{split}
 	\end{equation}
 \end{definition}%
 
-To show that the integral is independent of the choice of representation, we'd need to show that if we had two arbitrary representations $(x_n)_{n=0}^N$ and $(x'_m)_{m=0}^M$ with \emph{height sequences} $(c_n)_{n=1}^N$ and $(c'_m)_{m=1}^M$ resp. then $$\sum_{i=1}^N c_i(x_{i} - x_{i-1}) = \sum_{j=1}^M c'_j(x'_{j} - x'_{j-1})$$. 
+To show that the Integral is independent of the choice of representation, we'd need to show that if we had two arbitrary representations $(x_n)_{n=0}^N$ and $(x'_m)_{m=0}^M$ with \emph{height sequences} $(c_n)_{n=1}^N$ and $(c'_m)_{m=1}^M$ resp. then, $$\sum_{i=1}^N c_i(x_{i} - x_{i-1}) = \sum_{j=1}^M c'_j(x'_{j} - x'_{j-1}).$$ 
 The idea behind why this is true is the following; 
 \begin{itemize}
 \renewcommand\labelitemi{$\times$}
 \item
-Assuming first that one seqence is a subseqence of the other, we will focus on the representation that is more `fine' --- i.e. the one that has smaller width rectangles; ones which are divisions of the rectangles in the `coarser' representation. 
+Assuming first that one sequence is a subsequence of the other, we will focus on the representation that is more `fine' --- i.e. the one that has smaller width rectangles; ones which are divisions of the rectangles in the `coarser' representation. 
 \item
 We look at it in sections; with the sections being the steps of the coarser representation. So, in \ref{fig:step}, we'd look at $\{0, 1, 2 \ldots, 10\}$ between 0 and 2, then 2 and 3, then 3 and 6 $\ldots$ etc. 
 \item
-The two representations are for a single the step function, and we use this group adjacent rectangles with the same height. $\phi(x)$ must be constant in the section we are looking at, and so we know that all the rectangles here have the same height
+The two representations are for a single the step function; and we use this group adjacent rectangles with the same height. $\phi(x)$ must be constant in the section we are looking at, and so we know that all the rectangles here have the same height
 \item
 Then we can use the distributive property of multiplication to view the smaller width rectangles of the same height as one big rectangle with the width of the whole section. And boom, we're done, since those big rectangles are exactly the ones which you would use when integrating using the coarser representation.
 \item[$\otimes$]
 If neither representation is contained within the other, then we can just create a third representation which is the union the first ones. Both original sequences will be coarser than this new one, and so we can use the same reasoning as before, plus transitivity and symmetry, to prove the integrals are the same.
 \end{itemize}
 
-\begin{figure}[t] % Remember to change this to 'h'!
+\begin{figure}[h]
 	\renewcommand{\subfigcapskip}{-5pt}
 	\centering
 	\subfigure[Focus on finer representation.]{%
@@ -97,7 +97,7 @@ If neither representation is contained within the other, then we can just create
 	\label{fig:representations}
 \end{figure}
 
-\begin{prop}
+\begin{prop}\label{thm:repuni}
 	Given,
 	\begin{itemize}
 		\item
@@ -135,15 +135,18 @@ If neither representation is contained within the other, then we can just create
 		& \Rightarrow \quad & \sum_{X} = \sum_{X''} = \sum_{X'} \nonumber 
 	\end{IEEEeqnarray}
 \end{cproof}
-Now we are ready to define the \emph{Riemann Intergral} of any function $f\colon [a, b] \rightarrow \R$ $\ldots$ almost. We first need to define 2 seperate upper and lower intergrals, and then if they are the same, what we call that the {Reimann Intergral} of the function. This is actually why $\mathbbm{1}_\Q(x)$ is not \emph{Reimann Integrable}; it's upper and lower intergrals do not coincide. 
+%
+%
+%
+Now we are ready to define the \dref{def:riemann}[\emph{Riemann Integral}] of any function $f\colon [a, b] \rightarrow \R$ $\ldots$ almost. We first need to define 2 separate upper and lower integrals, and then if they are the same, what we call that the \emph{Riemann Integral} of the function. This is actually why $\mathbbm{1}_\Q(x)$ is not \emph{Riemann Integrable}; it's upper and lower integrals do not coincide. 
 
 \medskip
-To find the \emph{Upper Reimann Intergral} of $f$, first find \emph{all} the step functions which bound it from above, then calculate their integrals using \dref{def:stepint} and then, finally, define the smallest of these intergrals to be the \emph{Upper Reimann Intergral.} To find the \emph{Lower Reimann Integral,} you do the same thing, but from below. The set of Reimann Integrable functios on $[a,b]$ is $\mathcal{R}([a, b])$.
+To find the \dref{eq:upperriemann}[\emph{Upper Riemann Integral}] of $f$, first find \emph{all} the step functions which bound it from above, then calculate their integrals using \drefn{def:stint} and then, finally, define the smallest of these integrals to be the Upper Riemann Integral. To find the \dref{eq:lowerriemann}[\emph{Lower Riemann Integral}], you do the same thing, but from below. The set of all Riemann Integrable functions on $[a,b]$ is \dref{eq:riemann}[\emph{$\mathcal{R}([a, b])$}].
 
 \medskip
-Figure \ref{fig:areaapprox} tries to illustrate this, but it's important to remember that we aren't looking at a seqence of step functions, we are looking at \emph{all of them}. How to calculate/approximate intergrals using step functions is a whole thing in itself --- I wish I had started writing this sooner so that I could get into it because it's super interesting, but alas. Anyway, now we can define \emph{Reimann Integration} for real:
+Figure \ref{fig:areaapprox} tries to illustrate this, but it's important to remember that we aren't looking at a sequence of step functions, we are looking at \emph{all of them}. How to calculate/approximate integrals using sequences of [step] functions is a whole thing in itself --- I wish I had started writing this sooner so that I could get into it because it's super interesting, but alas$\ldots$ Anyway, now we can define Riemann Integration for real:
 
-\begin{definition}[Riemann Intergration]
+\begin{definition}[Riemann Integration]\label{def:riemann}
 	Given  
 	\begin{itemize}
 	\item
@@ -153,18 +156,19 @@ Figure \ref{fig:areaapprox} tries to illustrate this, but it's important to reme
 	\item
 		$S_u \subset \allstep : \phi \in S_u \Leftrightarrow \ \phi(x) \geq f(x') \quad \forall x' \in [a, b] $,
 	\end{itemize}
-	then the \emph{Lower Riemann Integral} of $f$ is
+	then the {\color{Magenta}\emph{Lower Riemann Integral}} of $f$ is
 	\begin{equation}
-		\underline {\int} \, f(x) \, dx \defeq \sup \left\{\intx{\psi(x)}; \;\; \psi \in S_l\right\}
+		{\color{Magenta}\underline {\int}} \, f(x) \, dx \defeq \sup \left\{\intx{\psi(x)}; \;\; \psi \in S_l\right\}
 		\label{eq:lowerriemann}
 	\end{equation} 
-	and the \emph{Upper Reimann Integral} is
+	and the {\color{Magenta}\emph{Upper Reimann Integral}} is
 	\begin{equation}
-		\overline {\int} \, f(x) \, dx \defeq \inf \left\{\intx{\phi(x)}; \;\; \phi \in S_u\right\}.
+		{\color{Magenta}\overline {\int}} \, f(x) \, dx \defeq \inf \left\{\intx{\phi(x)}; \;\; \phi \in S_u\right\}.
 		\label{eq:upperriemann}
 	\end{equation}
-	If \eqref{eq:lowerriemann} = \eqref{eq:upperriemann}, then $f$ is \emph{Reimann Integrable} the \emph{Reimann Integral} of $f$ as a function of $x$ is 
+	If \eqref{eq:lowerriemann} = \eqref{eq:upperriemann}, then $f$ is {\color{Magenta}\emph{Riemann Integrable}} the {\color{Magenta}\emph{Riemann Integral}} of $f$ as a function of $x$ is 
 	\begin{equation}
-		\intx{f(x)} \defeq \underline {\int} \, f(x) \, dx = \overline {\int} \, f(x) \, dx
+		{\color{Magenta}\intx{f(x)}} \defeq \underline {\int} \, f(x) \, dx = \overline {\int} \, f(x) \, dx
+		\label{eq:riemann}
 	\end{equation}
 \end{definition}
