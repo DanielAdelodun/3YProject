@@ -9,7 +9,7 @@ The definition of the Riemann Integral involves a few steps, and so it's going t
 	\label{fig:step}
 \end{figure}
 
-A function is called a \dref{def:stfun}[\emph{Step Function}] if and only if there exists some finite sequence of points such that the function is constant between any two adjacent points. So, for the function with the graph shown in Figure \ref{fig:step}, the points $\{0, 2, 3, 6, 8, 10\}$ are a finite sequence which make this a step function. We will often index the elements of sequence using $n$, and label each element $x_n$. We can call sequence this a \emph{`representation'} of the function, and we can call the sequence of constant heights taken just \emph{before} the $n^{th}$ point in our representation the corresponding \emph{`height sequence'}. The \emph{height sequence} along with the representation fully describe the function.
+A function is called a \dref{def:stfun}[\emph{Step Function}] if and only if there exists some finite sequence of points such that the function is constant between any two adjacent points. So, for the function with the graph shown in Figure \ref{fig:step}, the points $\{0, 2, 3, 6, 8, 10\}$ are a finite sequence which make this a step function. We will often index the elements of sequence using $n$, and label each element $x_n$. We can call sequence this a \emph{`representation'} of the function, and we can call the sequence of constant heights taken just \emph{before} the $n^{th}$ point in our representation the corresponding \emph{`height sequence'}. The \emph{\label{def:hseq}{\color{Magenta}height sequence}} along with the representation fully describe the function.
 
 \medskip
 Note two important points;
@@ -25,11 +25,11 @@ Given $\phi\colon \ [a, b] \rightarrow \R$, $\phi$ is a {\color{Magenta}\emph{St
         \item[$\logeq$]
             $\phi \in {\color{Magenta}\mathcal{S}([a, b])}$
         \item[$\logeq$]
-            $\exists N \! \in \! \N$ \ : \ $\exists X = (x_n)_{n=0}^N$ : $a = x_0 < x_1 < \ldots < x_{n-1} < x_n = b$, \ and \ $\forall m\in\N_{< N}$ we have $\exists! c_m \in \R$ : $\forall z \in (x_{m-1}, x_{m})$ we have $\phi(z) = c_m$.
+            $\exists N \! \in \! \N$ \ : \ $\exists {\color{Magenta}X} = (x_n)_{n=0}^N$ : $a = x_0 < x_1 < \ldots < x_{n-1} < x_n = b$, \ and \ $\forall m\in\N_{< N}$ we have $\exists! c_m \in \R$ : $\forall z \in (x_{m-1}, x_{m})$ we have $\phi(z) = c_m$.
     \end{itemize}
 \end{definition}
 
-This also defines \emph{the set of all step functions on} $[a, b]$ as \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}]. This kind of thing is done a lot in analysis --- we often want to look at the set of all things which satisfy some property. We normally don't have to \emph{find} them all --- we just need a way to represent the full set. The fact that it'd be near impossible to try to imagine the set \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}] is irrelevant --- it's just important we know it exists.
+This also defines \emph{the set of all step functions on} $[a, b]$ as \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}]. This kind of thing is done a lot in analysis --- we often want to look at the set of all things which satisfy some property. We normally don't have to \emph{find} them all --- we just need a way to represent the full set. The fact that it'd be near impossible to try to imagine the set \dref{def:stfun}[\emph{$\mathcal{S}[a, b]$}] is irrelevant --- it's just important we know it exists. The sequence \dref{def:stfun}[$X$] is a representation.
 
 \medskip
 Next, we want to define what it means to \dref{def:stint}[\emph{Integrate}] a step function. Remember, the point of working with step functions is because it's easy to find the area of rectangles, and integration is all about finding areas. So where are the rectangles? 

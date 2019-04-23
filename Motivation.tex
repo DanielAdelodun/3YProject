@@ -32,10 +32,24 @@ Already, we can see an improvement over Riemann Integration; Lebesgue Integratio
 
 \input{Riemann.tex}
 
-\subsection{The Indicator function}
+\section{Conclusion}
 \begin{figure}[ht]
 	\centering
 	\includegraphics{Code/Rational.png}
 	\caption{An illustration of the indicator function $\mathbbm{1}_\Q(x)$, showing a few rationals that are multiples of negative powers of 2.}
 	\label{fig:rational}
 \end{figure}
+
+I have run out of time :(. So, my conclusion will be me starting why the Riemann Integral fails in a certain case, how the Lebesgue Integral improves on those shortcomings, and what I would have talked about had I started earlier. 
+
+\medskip
+When we try to integrate a the indicator function of the rationals --- $\mathbbm{1}_\Q(x)$ --- we run into a problem. If we wanted to bound it from above with step functions, every possible interval we could pick will contain at least one rational. What this means is that, at a minimum, the function will be a constant one. More obviously, if we wanted to bound it from below, we'd end up with a constant zero.
+
+\medskip
+Intuition says that if we \emph{could} integrate this function, then it's integral would be very close to zero. Why? Because the set of rational numbers is so much smaller that $\R$, and so you'd expect the space underneath it to be much smaller space underneath (or really, not underneath, in this case) the reals. In fact, compared to the $\R$, the size rationals basically zero$\ldots$
+
+\medskip
+Lebesgue Integration works because it makes use of the branch of mathematics that formalizes the whole idea of what it means to find the `size' of set. Had I started sooner, I would mentioned other uses of this branch of mathematics, since being to measure things is, obviously, very useful. Namely, I would have talked about it's use in the definition of a \dref{def:rvariable}[\emph{Random Variable}].
+
+\medskip
+Nevertheless, I have included a full list of definitions as an appendix to this paper, so we did in the end (literally) do what we set out to do; work our way up to defining the Lebesgue Integral.
